@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+def run(io, error_io, client)
+  io.puts "Deployed"
+  0
+end
+
+def client
+  SaturnCI::Client.new(SaturnCI::Credentials.new(
+    user_id: ENV.fetch('SATURNCI_USER_ID'),
+    api_token: ENV.fetch('SATURNCI_API_TOKEN')
+  ))
+end
+
+exit run($stdout, $stderr, client) if $PROGRAM_NAME == __FILE__

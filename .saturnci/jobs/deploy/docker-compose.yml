@@ -1,0 +1,8 @@
+services:
+  job:
+    build:
+      context: ../../..
+      dockerfile: .saturnci/jobs/deploy/Dockerfile
+    volumes:
+      - ../../../:/app
+    working_dir: /app

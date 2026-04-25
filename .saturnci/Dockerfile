@@ -25,9 +25,6 @@ RUN apt-get update && apt-get install -y \
     # Install PostgreSQL client libraries for database connections.
     libpq-dev \
 
-    # Install libyaml headers needed for the psych gem's native extension.
-    libyaml-dev \
-
     # Install JavaScript runtime for asset processing.
     nodejs \
 

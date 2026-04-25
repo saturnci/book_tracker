@@ -11,6 +11,8 @@ def run(io, error_io, github_event, client)
   # GitHub push event.
   return 0 unless github_event == "push"
 
+  # This protects against the case where the GitHub push is actually a branch
+  # deletion.
   return 0 if ENV['DELETED'] == "true"
 
   # Halt if branch name is missing.

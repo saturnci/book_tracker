@@ -3,8 +3,13 @@
 # entrypoint is a special job which SaturnCI invokes upon every single GitHub
 # event.
 
+# SaturnCI jobs are wrapped in this #run method so that jobs can be tested and
+# the dependencies such as I/O and the SaturnCI SDK can be dependency-injected
+# with stubs.
 def run(io, error_io, github_event, client)
-  # Output the SaturnCI SDK version for diagnostic purposes.
+  # Output the SaturnCI SDK version for diagnostic purposes. For more
+  # information on the SaturnCI SDK, visit
+  # https://github.com/saturnci/saturnci-sdk.
   io.puts "SaturnCI SDK version: #{SaturnCI::VERSION}"
 
   # We only want this particular deploy-on-green job to be triggered for the

@@ -1,17 +1,26 @@
 #!/usr/bin/env ruby
 
+# entrypoint is a special job which SaturnCI invokes upon every single GitHub
+# event.
+
 def run(io, error_io, github_event, client)
+  # Output the SaturnCI SDK version for diagnostic purposes.
   io.puts "SaturnCI SDK version: #{SaturnCI::VERSION}"
 
+  # We only want this particular deploy-on-green job to be triggered for the
+  # GitHub push event.
   return 0 unless github_event == "push"
+
   return 0 if ENV['DELETED'] == "true"
 
+  # Halt if branch name is missing.
   branch_name = ENV['BRANCH_NAME']
   if branch_name.to_s.empty?
     error_io.puts "BRANCH_NAME env var is required"
     return 1
   end
 
+  # Halt if commit hash is missing.
   commit_hash = ENV['COMMIT_HASH']
   if commit_hash.to_s.empty?
     error_io.puts "COMMIT_HASH env var is required"
@@ -52,6 +61,7 @@ def run(io, error_io, github_event, client)
     )
   end
 
+  # Returning an exit code of 0 means success.
   0
 end
 
@@ -60,6 +70,11 @@ def client
 end
 
 def credentials
+  # SATURNCI_USER_ID is your user ID from
+  # https://app.saturnci.com/user_profile.
+  #
+  # SATURNCI_API_TOKEN is the value of a personal access token from
+  # https://app.saturnci.com/user_profile/personal_access_tokens.
   SaturnCI::Credentials.new(
     user_id: ENV.fetch('SATURNCI_USER_ID'),
     api_token: ENV.fetch('SATURNCI_API_TOKEN')

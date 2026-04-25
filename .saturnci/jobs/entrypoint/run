@@ -35,7 +35,7 @@ def run(io, error_io, github_event, client)
     author_name: author_name
   )
 
-  io.puts "Testing: #{test_suite_run.url}"
+  io.puts "Running test suite: #{test_suite_run.url}"
   test_suite_run.wait_for_completion
   io.puts "Tests #{test_suite_run.status.downcase}."
 

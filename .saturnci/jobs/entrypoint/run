@@ -77,13 +77,9 @@ def client
 end
 
 def credentials
-  # SATURNCI_USER_ID is your user ID from
-  # https://app.saturnci.com/user_profile.
-  #
   # SATURNCI_API_TOKEN is the value of a personal access token from
   # https://app.saturnci.com/user_profile/personal_access_tokens.
   SaturnCI::Credentials.new(
-    user_id: ENV.fetch('SATURNCI_USER_ID'),
     api_token: ENV.fetch('SATURNCI_API_TOKEN')
   )
 end

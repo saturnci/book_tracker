@@ -7,7 +7,6 @@ end
 
 def client
   SaturnCI::Client.new(SaturnCI::Credentials.new(
-    user_id: ENV.fetch('SATURNCI_USER_ID'),
     api_token: ENV.fetch('SATURNCI_API_TOKEN')
   ))
 end

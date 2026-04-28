@@ -48,7 +48,8 @@ def run(io, error_io, github_event, client)
     branch_name: branch_name,
     commit_hash: commit_hash,
     commit_message: commit_message,
-    author_name: author_name
+    author_name: author_name,
+    task_adapter_name: "rails_rspec"
   )
 
   io.puts "Running test suite: #{test_suite_run.url}"
